@@ -1,10 +1,13 @@
 package service
 
 import (
+	segmentation_service "segmentation-service"
 	"segmentation-service/pkg/repository"
 )
 
 type User interface {
+	CreateUser(user segmentation_service.User) (int, error)
+	DeleteUser(userId int) error
 }
 
 type Segment interface {

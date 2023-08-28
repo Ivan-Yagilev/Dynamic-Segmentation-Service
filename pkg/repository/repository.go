@@ -1,8 +1,14 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	segmentation_service "segmentation-service"
+
+	"github.com/jmoiron/sqlx"
+)
 
 type User interface {
+	CreateUser(user segmentation_service.User) (int, error)
+	DeleteUser(userId int) error
 }
 
 type Segment interface {

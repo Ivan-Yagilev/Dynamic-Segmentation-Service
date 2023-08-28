@@ -21,10 +21,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	user := router.Group("/user")
 	{
-		user.POST("/:id", h.createUser)
-		user.GET("/", h.getAllUsers)
-		user.GET("/:id", h.getUserById)
-		user.PATCH("/:id", h.updateUser)
+		user.POST("/", h.createUser)
 		user.DELETE("/:id", h.deleteUser)
 	}
 
