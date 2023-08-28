@@ -2,7 +2,6 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,16 +23,16 @@ func (h *Handler) updateUser(c *gin.Context) {
 }
 
 func (h *Handler) deleteUser(c *gin.Context) {
-	userId, err := getUserId(c)
-	if err != nil {
-		return
-	}
+	// userId, err := getUserId(c)
+	// if err != nil {
+	// 	return
+	// }
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, "invalid id param")
-		return
-	}
+	// id, err := strconv.Atoi(c.Param("id"))
+	// if err != nil {
+	// 	newErrorResponse(c, http.StatusInternalServerError, "invalid id param")
+	// 	return
+	// }
 
 	// 
 

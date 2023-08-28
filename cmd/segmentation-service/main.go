@@ -6,26 +6,45 @@ import (
 	"os/signal"
 	segmentation_service "segmentation-service"
 	"segmentation-service/pkg/handler"
+	"segmentation-service/pkg/repository"
+	"segmentation-service/pkg/service"
 	"syscall"
+
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 func main() {
-	//TODO: init config - viper
-	//TODO: init logger - logrus
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("config init error: %s", err.Error())
 	}
 
+	if err := godotenv.Load(); err != nil {
+		logrus.Fatalf("env reading error: %s", err.Error())
+	}
+
 	//TODO: init db - postgres in docker
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     viper.GetString("db.host"),
+		Port:     viper.GetString("db.port"),
+		Username: viper.GetString("db.username"),
+		DBName:   viper.GetString("db.dbname"),
+		SSLMode:  viper.GetString("db.sslmode"),
+		Password: os.Getenv("PG_PASSWORD"),
+	})
+	if err != nil {
+		logrus.Fatalf("failed to init db: %s", err.Error())
+	}
 
 	//TODO: init router - gin
-
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository(db)
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
 	srv := &segmentation_service.Server{}
 	go func() {
@@ -44,6 +63,9 @@ func main() {
 		logrus.Errorf("server shutting down error: %s", err.Error())
 	}
 	//TODO: run server
+	if err := db.Close(); err != nil {
+		logrus.Errorf("db connection close error: %s", err.Error())
+	}
 }
 
 func initConfig() error {
