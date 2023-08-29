@@ -7,12 +7,6 @@ type Segment struct {
 	Segmentname string `json:"segmentname" db:"segmentname" binding:"required"`
 }
 
-type UserSegment struct {
-	Id        int
-	UserId    int
-	SegmentId int
-}
-
 type UpdateSegmentInput struct {
 	Segmentname *string `json:"segmentname"`
 }

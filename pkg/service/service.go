@@ -18,14 +18,20 @@ type Segment interface {
 	DeleteSegment(segment segmentation_service.Segment) error
 }
 
+type UserSegment interface {
+	CreateUserSegment(userSegment segmentation_service.UserSegment) (int, error)
+}
+
 type Service struct {
 	User
 	Segment
+	UserSegment
 }
 
 func NewService(repo *repository.Repository) *Service {
 	return &Service{
 		User:    NewUserService(repo.User),
 		Segment: NewSegmentService(repo.Segment),
+		UserSegment: NewUserSegmentService(repo.UserSegment),
 	}
 }

@@ -19,14 +19,20 @@ type Segment interface {
 	DeleteSegment(segment segmentation_service.Segment) error
 }
 
+type UserSegment interface {
+	CreateUserSegment(userSegment segmentation_service.UserSegment) (int, error)
+}
+
 type Repository struct {
 	User
 	Segment
+	UserSegment
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		User:    NewUserPostgres(db),
 		Segment: NewSegmentPostgres(db),
+		UserSegment: NewUserSegmentPostgres(db),
 	}
 }
