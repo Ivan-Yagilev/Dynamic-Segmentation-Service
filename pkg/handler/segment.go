@@ -13,7 +13,7 @@ type getAllSegmentsResponse struct {
 }
 
 func (h *Handler) getAllSegments(c *gin.Context) {
-	lists, err := h.services.GetAllSegments()
+	lists, err := h.services.Segment.GetAllSegments()
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

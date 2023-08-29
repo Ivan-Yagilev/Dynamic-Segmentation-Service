@@ -20,6 +20,8 @@ type Segment interface {
 
 type UserSegment interface {
 	CreateUserSegment(userSegment segmentation_service.UserSegment) error
+	DeleteUserSegment(userSegment segmentation_service.UserSegment) error
+	GetAllSegments(userId int) ([]segmentation_service.Segment, error)
 }
 
 type Service struct {

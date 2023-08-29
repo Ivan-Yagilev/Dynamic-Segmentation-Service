@@ -13,7 +13,7 @@ type getAllUsersResponse struct {
 }
 
 func (h *Handler) getAllUsers(c *gin.Context) {
-	lists, err := h.services.GetAllUsers()
+	lists, err := h.services.User.GetAllUsers()
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

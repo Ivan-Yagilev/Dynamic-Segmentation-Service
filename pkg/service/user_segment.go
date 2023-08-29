@@ -18,3 +18,11 @@ func NewUserSegmentService(repo repository.UserSegment) *UserSegmentService {
 func (s *UserSegmentService) CreateUserSegment(userSegment segmentation_service.UserSegment) error {
 	return s.repo.CreateUserSegment(userSegment)
 }
+
+func (s *UserSegmentService) DeleteUserSegment(userSegment segmentation_service.UserSegment) error {
+	return s.repo.DeleteUserSegment(userSegment)
+}
+
+func (s *UserSegmentService) GetAllSegments(userId int) ([]segmentation_service.Segment, error) {
+	return s.repo.GetAllSegments(userId)
+}
