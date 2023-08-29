@@ -60,5 +60,9 @@ func (r *UserSegmentPostgres) GetAllSegments(userId int) ([]segmentation_service
 		usersTable, user_segmentTable, segmentsTable)
 	err := r.db.Select(&lists, query, userId)
 
+	if err != nil {
+		return nil, nil
+	}
+
 	return lists, err
 }

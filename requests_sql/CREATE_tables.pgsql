@@ -14,7 +14,7 @@ CREATE TABLE segments
 CREATE TABLE user_segment
 (
     id        	 SERIAL  PRIMARY KEY,
-    user_id   	 INTEGER NOT NULL REFERENCES users,
-    segment_id   INTEGER NOT NULL REFERENCES segments,
+    user_id   	 INTEGER NOT NULL REFERENCES users ON DELETE CASCADE,
+    segment_id   INTEGER NOT NULL REFERENCES segments ON DELETE CASCADE,
     UNIQUE (user_id, segment_id)
 );
