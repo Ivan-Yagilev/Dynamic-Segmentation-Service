@@ -26,3 +26,10 @@ func (s *SegmentService) CreateSegment(segment segmentation_service.Segment) (in
 func (s *SegmentService) DeleteSegment(segment segmentation_service.Segment) error {
 	return s.repo.DeleteSegment(segment)
 }
+
+func (s *SegmentService) UpdateSegment(id int, input segmentation_service.UpdateSegmentInput) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
+	return s.repo.UpdateSegment(id, input)
+}

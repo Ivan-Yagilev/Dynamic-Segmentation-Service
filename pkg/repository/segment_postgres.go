@@ -46,3 +46,10 @@ func (r *SegmentPostgres) DeleteSegment(segment segmentation_service.Segment) er
 
 	return err
 }
+
+func (r *SegmentPostgres) UpdateSegment(id int, input segmentation_service.UpdateSegmentInput) error {
+	query := fmt.Sprintf("UPDATE %s SET segmentname=$1 WHERE id=$2;", segmentsTable)
+
+	_, err := r.db.Exec(query, input.Segmentname, id)
+	return err
+}

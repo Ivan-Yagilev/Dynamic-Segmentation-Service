@@ -14,6 +14,7 @@ type User interface {
 type Segment interface {
 	GetAllSegments() ([]segmentation_service.Segment, error)
 	CreateSegment(segment segmentation_service.Segment) (int, error)
+	UpdateSegment(id int, input segmentation_service.UpdateSegmentInput) error
 	DeleteSegment(segment segmentation_service.Segment) error
 }
 

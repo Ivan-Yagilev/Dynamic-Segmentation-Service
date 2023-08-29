@@ -30,6 +30,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		segment.GET("/", h.getAllSegments)
 		segment.POST("/", h.createSegment)
+		segment.PATCH(":id", h.updateSegment)
 		segment.DELETE("/", h.deleteSegment)
 	}
 
