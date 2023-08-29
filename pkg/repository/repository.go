@@ -12,6 +12,9 @@ type User interface {
 }
 
 type Segment interface {
+	GetAllSegments() ([]segmentation_service.Segment, error)
+	CreateSegment(segment segmentation_service.Segment) (int, error)
+	DeleteSegment(segment segmentation_service.Segment) error
 }
 
 type Repository struct {
