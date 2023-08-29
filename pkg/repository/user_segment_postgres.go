@@ -17,15 +17,20 @@ func NewUserSegmentPostgres(db *sqlx.DB) *UserSegmentPostgres {
 	}
 }
 
-func (r *UserSegmentPostgres) CreateUserSegment(userSegment segmentation_service.UserSegment) (int, error) {
-	var id int
+func (r *UserSegmentPostgres) CreateUserSegment(userSegment segmentation_service.UserSegment) error {
+	var segmentListStr string
 
-	query := fmt.Sprintf("INSERT INTO %s (user_id, segment_id) VALUES ($1, (SELECT id FROM segments WHERE segmentname=$2)) RETURNING id;", user_segmentTable)
-
-	row := r.db.QueryRow(query, userSegment.UserId, userSegment.Segmentname)
-	if err := row.Scan(&id); err != nil {
-		return 0, err
+	for i := 0; i < len(userSegment.Segmentlist); i++ {
+		if i != len(userSegment.Segmentlist) - 1{
+			segmentListStr += "'" + userSegment.Segmentlist[i] + "', "
+		} else {
+			segmentListStr += "'" + userSegment.Segmentlist[i] + "'"
+		}
 	}
 
-	return id, nil
+	query := fmt.Sprintf("INSERT INTO %s (user_id, segment_id) SELECT $1, id FROM segments WHERE segmentname IN (%s);", user_segmentTable, segmentListStr)
+
+	_, err := r.db.Exec(query, userSegment.UserId)
+
+	return err
 }

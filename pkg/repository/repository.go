@@ -20,7 +20,7 @@ type Segment interface {
 }
 
 type UserSegment interface {
-	CreateUserSegment(userSegment segmentation_service.UserSegment) (int, error)
+	CreateUserSegment(userSegment segmentation_service.UserSegment) error
 }
 
 type Repository struct {

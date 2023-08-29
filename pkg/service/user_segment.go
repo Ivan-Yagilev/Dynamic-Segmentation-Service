@@ -15,6 +15,6 @@ func NewUserSegmentService(repo repository.UserSegment) *UserSegmentService {
 	}
 }
 
-func (s *UserSegmentService) CreateUserSegment(userSegment segmentation_service.UserSegment) (int, error) {
+func (s *UserSegmentService) CreateUserSegment(userSegment segmentation_service.UserSegment) error {
 	return s.repo.CreateUserSegment(userSegment)
 }
