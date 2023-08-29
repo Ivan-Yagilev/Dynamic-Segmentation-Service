@@ -5,3 +5,8 @@ type User struct {
 	Username string `json:"username" db:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
+
+type UserResponse struct {
+	Id       int    `json:"id" db:"id"`
+	Username string `json:"username" db:"username" binding:"required"`
+}

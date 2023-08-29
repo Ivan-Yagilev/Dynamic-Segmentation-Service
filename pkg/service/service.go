@@ -6,6 +6,7 @@ import (
 )
 
 type User interface {
+	GetAllUsers() ([]segmentation_service.UserResponse, error)
 	CreateUser(user segmentation_service.User) (int, error)
 	DeleteUser(userId int) error
 }

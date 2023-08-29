@@ -17,6 +17,15 @@ func NewUserPostgres(db *sqlx.DB) *UserPostgres {
 	}
 }
 
+func (r *UserPostgres) GetAllUsers() ([]segmentation_service.UserResponse, error) {
+	var lists []segmentation_service.UserResponse
+
+	query := fmt.Sprintf("SELECT u.id, u.username FROM %s u", usersTable)
+	err := r.db.Select(&lists, query)
+
+	return lists, err
+}
+
 func (r *UserPostgres) CreateUser(user segmentation_service.User) (int, error) {
 	var id int
 

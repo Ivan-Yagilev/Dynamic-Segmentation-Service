@@ -18,6 +18,10 @@ func NewUserService(repo repository.User) *UserService {
 	}
 }
 
+func (s *UserService) GetAllUsers() ([]segmentation_service.UserResponse, error) {
+	return s.repo.GetAllUsers()
+}
+
 func (s *UserService) CreateUser(user segmentation_service.User) (int, error) {
 	user.Password = generatePasswordHash(user.Password)
 	return s.repo.CreateUser(user)
