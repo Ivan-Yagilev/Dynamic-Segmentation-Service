@@ -1,10 +1,38 @@
-version: "3.9"
+version: '3'
+# or when an error occurs:
+# version: '2.2'
+
 services:
-  postgres:
+  backend:
+    image: back:1
+    environment:
+      &dbenv
+      PG_NAME: db
+      PG_USER: bruh
+      PG_PASSWORD: bruh
+      PG_HOST: db
+    ports:
+      - 8081:8081
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
     image: postgres:14
     environment:
-      POSTGRES_DB: "db"
-      POSTGRES_USER: "bruh"
-      POSTGRES_PASSWORD: "bruh"
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: db
+      POSTGRES_USER: bruh
+      POSTGRES_PASSWORD: bruh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "bruh"]
+
+  migrations:
+    image: back:1
+    environment:
+      <<: *dbenv
+    command: sh -c "migrate -path ./schema -database 'postgres://bruh:bruh@0.0.0.0:5432/data?sslmode=disable' up"
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
