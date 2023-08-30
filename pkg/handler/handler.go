@@ -43,4 +43,3 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	return router
 }
-

@@ -33,8 +33,8 @@ type Repository struct {
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		User:    NewUserPostgres(db),
-		Segment: NewSegmentPostgres(db),
+		User:        NewUserPostgres(db),
+		Segment:     NewSegmentPostgres(db),
 		UserSegment: NewUserSegmentPostgres(db),
 	}
 }

@@ -19,6 +19,7 @@ func (h *Handler) createUserSegment(c *gin.Context) {
 	err := h.services.CreateUserSegment(input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	c.JSON(http.StatusOK, statusResponse{

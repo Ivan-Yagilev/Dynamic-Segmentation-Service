@@ -21,7 +21,7 @@ func (r *UserSegmentPostgres) CreateUserSegment(userSegment segmentation_service
 	var segmentListStr string
 
 	for i := 0; i < len(userSegment.Segmentlist); i++ {
-		if i != len(userSegment.Segmentlist) - 1{
+		if i != len(userSegment.Segmentlist)-1 {
 			segmentListStr += "'" + userSegment.Segmentlist[i] + "', "
 		} else {
 			segmentListStr += "'" + userSegment.Segmentlist[i] + "'"
@@ -39,7 +39,7 @@ func (r *UserSegmentPostgres) DeleteUserSegment(userSegment segmentation_service
 	var segmentListStr string
 
 	for i := 0; i < len(userSegment.Segmentlist); i++ {
-		if i != len(userSegment.Segmentlist) - 1{
+		if i != len(userSegment.Segmentlist)-1 {
 			segmentListStr += "'" + userSegment.Segmentlist[i] + "', "
 		} else {
 			segmentListStr += "'" + userSegment.Segmentlist[i] + "'"
@@ -56,7 +56,7 @@ func (r *UserSegmentPostgres) DeleteUserSegment(userSegment segmentation_service
 func (r *UserSegmentPostgres) GetAllSegments(userId int) ([]segmentation_service.Segment, error) {
 	var lists []segmentation_service.Segment
 
-	query := fmt.Sprintf("SELECT s.id AS id, s.segmentname AS segmentname FROM %s u LEFT JOIN %s us ON us.user_id = u.id LEFT JOIN %s s ON s.id = us.segment_id WHERE u.id=$1;", 
+	query := fmt.Sprintf("SELECT s.id AS id, s.segmentname AS segmentname FROM %s u LEFT JOIN %s us ON us.user_id = u.id LEFT JOIN %s s ON s.id = us.segment_id WHERE u.id=$1;",
 		usersTable, user_segmentTable, segmentsTable)
 	err := r.db.Select(&lists, query, userId)
 
