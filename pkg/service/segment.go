@@ -19,11 +19,11 @@ func (s *SegmentService) GetAllSegments() ([]segmentation_service.Segment, error
 	return s.repo.GetAllSegments()
 }
 
-func (s *SegmentService) CreateSegment(segment segmentation_service.Segment) (int, error) {
+func (s *SegmentService) CreateSegment(segment segmentation_service.SegmentWOId) (int, error) {
 	return s.repo.CreateSegment(segment)
 }
 
-func (s *SegmentService) DeleteSegment(segment segmentation_service.Segment) error {
+func (s *SegmentService) DeleteSegment(segment segmentation_service.SegmentWOId) error {
 	return s.repo.DeleteSegment(segment)
 }
 

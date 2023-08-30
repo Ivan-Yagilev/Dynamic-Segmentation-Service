@@ -1,0 +1,196 @@
+definitions:
+  handler.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  handler.getAllSegmentsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/segmentation_service.Segment'
+        type: array
+    type: object
+  handler.statusResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  segmentation_service.Segment:
+    properties:
+      id:
+        type: integer
+      segmentname:
+        type: string
+    required:
+    - segmentname
+    type: object
+  segmentation_service.SegmentWOId:
+    properties:
+      segmentname:
+        type: string
+    required:
+    - segmentname
+    type: object
+  segmentation_service.UpdateSegmentInput:
+    properties:
+      segmentname:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /segment/:
+    delete:
+      consumes:
+      - application/json
+      description: delete segment by name
+      operationId: delete-segment
+      parameters:
+      - description: segmentname
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/segmentation_service.SegmentWOId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Delete segment
+      tags:
+      - Segments
+    get:
+      consumes:
+      - application/json
+      description: get all segments
+      operationId: get-all-segments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getAllSegmentsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get All Segments
+      tags:
+      - Segments
+    post:
+      consumes:
+      - application/json
+      description: create segment
+      operationId: create-segment
+      parameters:
+      - description: segment info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/segmentation_service.SegmentWOId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Create segment
+      tags:
+      - Segments
+  /segment/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: update segmentname by id
+      operationId: update-segment
+      parameters:
+      - description: Segment ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: segmentname
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/segmentation_service.UpdateSegmentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Update Segment
+      tags:
+      - Segments
+swagger: "2.0"

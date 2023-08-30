@@ -7,6 +7,10 @@ type Segment struct {
 	Segmentname string `json:"segmentname" db:"segmentname" binding:"required"`
 }
 
+type SegmentWOId struct {
+	Segmentname string `json:"segmentname" db:"segmentname" binding:"required"`
+}
+
 type UpdateSegmentInput struct {
 	Segmentname *string `json:"segmentname"`
 }

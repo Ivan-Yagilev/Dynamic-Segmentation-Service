@@ -26,7 +26,7 @@ func (r *SegmentPostgres) GetAllSegments() ([]segmentation_service.Segment, erro
 	return lists, err
 }
 
-func (r *SegmentPostgres) CreateSegment(segment segmentation_service.Segment) (int, error) {
+func (r *SegmentPostgres) CreateSegment(segment segmentation_service.SegmentWOId) (int, error) {
 	var id int
 
 	query := fmt.Sprintf("INSERT INTO %s (segmentname) VALUES ($1) RETURNING id;", segmentsTable)
@@ -39,7 +39,7 @@ func (r *SegmentPostgres) CreateSegment(segment segmentation_service.Segment) (i
 	return id, nil
 }
 
-func (r *SegmentPostgres) DeleteSegment(segment segmentation_service.Segment) error {
+func (r *SegmentPostgres) DeleteSegment(segment segmentation_service.SegmentWOId) error {
 	query := fmt.Sprintf("DELETE FROM %s WHERE segmentname = $1;", segmentsTable)
 
 	_, err := r.db.Exec(query, segment.Segmentname)

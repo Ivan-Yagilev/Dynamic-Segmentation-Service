@@ -15,9 +15,16 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"segmentation-service/docs"
 )
 
 func main() {
+	docs.SwaggerInfo.Title = "Dynamic Segmentation Service"
+	docs.SwaggerInfo.Description = "API Server for Dynamic User Segmentation App"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "127.0.0.1:8081"
+	docs.SwaggerInfo.BasePath = "/"
+
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
 	if err := initConfig(); err != nil {
@@ -28,7 +35,6 @@ func main() {
 		logrus.Fatalf("env reading error: %s", err.Error())
 	}
 
-	//TODO: init db - postgres in docker
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
@@ -41,7 +47,6 @@ func main() {
 		logrus.Fatalf("failed to init db: %s", err.Error())
 	}
 
-	//TODO: init router - gin
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
@@ -62,7 +67,7 @@ func main() {
 	if err := srv.Shutdown(context.Background()); err != nil {
 		logrus.Errorf("server shutting down error: %s", err.Error())
 	}
-	//TODO: run server
+
 	if err := db.Close(); err != nil {
 		logrus.Errorf("db connection close error: %s", err.Error())
 	}
