@@ -18,6 +18,13 @@ definitions:
           $ref: '#/definitions/segmentation_service.UserResponse'
         type: array
     type: object
+  handler.getSegmentsByUserIdResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/segmentation_service.Segment'
+        type: array
+    type: object
   handler.statusResponse:
     properties:
       status:
@@ -62,6 +69,18 @@ definitions:
         type: string
     required:
     - username
+    type: object
+  segmentation_service.UserSegment:
+    properties:
+      id:
+        type: integer
+      segmentlist:
+        items:
+          type: string
+        type: array
+    required:
+    - id
+    - segmentlist
     type: object
 info:
   contact: {}
@@ -219,6 +238,122 @@ paths:
       summary: Update Segment
       tags:
       - Segments
+  /user-segment/:
+    delete:
+      consumes:
+      - application/json
+      description: delete user-segment by user id and list of segments
+      operationId: delete-user-segment
+      parameters:
+      - description: user-segment info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/segmentation_service.UserSegment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Delete user-segment
+      tags:
+      - UserSegment
+    post:
+      consumes:
+      - application/json
+      description: create user-segment by user id and list of segments
+      operationId: create-user-segment
+      parameters:
+      - description: user-segment info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/segmentation_service.UserSegment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Create user-segment
+      tags:
+      - UserSegment
+  /user-segment/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get active user segments
+      operationId: get-all-user-segments
+      parameters:
+      - description: Segment ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getSegmentsByUserIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get User Segments
+      tags:
+      - UserSegment
   /user/:
     get:
       consumes:
