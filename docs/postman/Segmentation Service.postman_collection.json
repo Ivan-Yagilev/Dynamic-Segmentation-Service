@@ -24,7 +24,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/user/",
+							"raw": "http://127.0.0.1:8000/user/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -32,7 +32,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"user",
 								""
@@ -47,7 +47,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/user/1",
+							"raw": "http://127.0.0.1:8000/user/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -55,7 +55,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"user",
 								"1"
@@ -70,7 +70,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/user/",
+							"raw": "http://127.0.0.1:8000/user/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -78,7 +78,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"user",
 								""
@@ -107,7 +107,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/segment/",
+							"raw": "http://127.0.0.1:8000/segment/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -115,7 +115,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"segment",
 								""
@@ -139,7 +139,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/segment/",
+							"raw": "http://127.0.0.1:8000/segment/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -147,7 +147,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"segment",
 								""
@@ -162,7 +162,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/segment/",
+							"raw": "http://127.0.0.1:8000/segment/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -170,7 +170,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"segment",
 								""
@@ -194,7 +194,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/segment/1",
+							"raw": "http://127.0.0.1:8000/segment/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -202,7 +202,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"segment",
 								"1"
@@ -231,7 +231,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/user-segment/",
+							"raw": "http://127.0.0.1:8000/user-segment/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -239,7 +239,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"user-segment",
 								""
@@ -263,7 +263,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/user-segment/",
+							"raw": "http://127.0.0.1:8000/user-segment/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -271,7 +271,7 @@
 								"0",
 								"1"
 							],
-							"port": "8081",
+							"port": "8000",
 							"path": [
 								"user-segment",
 								""

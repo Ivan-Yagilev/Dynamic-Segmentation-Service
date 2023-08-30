@@ -22,7 +22,7 @@ func main() {
 	docs.SwaggerInfo.Title = "Dynamic Segmentation Service"
 	docs.SwaggerInfo.Description = "API Server for Dynamic User Segmentation App"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "127.0.0.1:8081"
+	docs.SwaggerInfo.Host = "127.0.0.1:8000"
 	docs.SwaggerInfo.BasePath = "/"
 
 	logrus.SetFormatter(new(logrus.JSONFormatter))

@@ -7,17 +7,15 @@ services:
     image: back:1
     environment:
       &dbenv
-      PG_NAME: db
       PG_USER: bruh
       PG_PASSWORD: bruh
-      PG_HOST: db
+      PG_HOST: database
     ports:
-      - 8081:8081
+      - 8000:8000
     depends_on:
-      db:
-        condition: service_healthy
+      - database
 
-  db:
+  database:
     image: postgres:14
     environment:
       POSTGRES_DB: db
@@ -30,9 +28,7 @@ services:
     image: back:1
     environment:
       <<: *dbenv
-    command: sh -c "migrate -path ./schema -database 'postgres://bruh:bruh@0.0.0.0:5432/data?sslmode=disable' up"
+    command: sh -c "migrate -path ./schema -database 'postgres://bruh:bruh@0.0.0.0:5432/db?sslmode=disable' up"
     depends_on:
-      db:
-        condition: service_healthy
-      backend:
-        condition: service_started
+      - database
+      - backend
