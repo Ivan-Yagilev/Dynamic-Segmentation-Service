@@ -4,7 +4,6 @@ services:
   backend:
     image: back:1
     environment:
-      &dbenv
       PG_NAME: db
       PG_USER: bruh
       PG_PASSWORD: bruh
@@ -25,14 +24,3 @@ services:
       - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-U", "bruh"]
-
-  migrations:
-    image: back:1
-    environment:
-      <<: *dbenv
-    command: sh -c "migrate -path ./schema -database 'postgres://bruh:bruh@0.0.0.0:5432/db?sslmode=disable' up"
-    depends_on:
-      database:
-        condition: service_healthy
-      backend:
-        condition: service_started
